@@ -1,0 +1,38 @@
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "driver/gpio.h"
+#include <stdio.h> 
+
+#define LED_GREEN GPIO_NUM_19
+#define LED_MERAH GPIO_NUM_18
+#define LED_YLW GPIO_NUM_21
+#define HIGH 1
+#define LOW 0
+#define LED_BUILTIN GPIO_NUM_2
+
+void app_main() {
+    gpio_set_direction(LED_GREEN, GPIO_MODE_OUTPUT);
+    gpio_set_direction(LED_MERAH, GPIO_MODE_OUTPUT);
+    gpio_set_direction(LED_YLW, GPIO_MODE_OUTPUT);
+    gpio_set_direction(LED_BUILTIN, GPIO_MODE_OUTPUT);
+    while (1)
+    {
+        printf("hello world");
+        gpio_set_level(LED_GREEN,HIGH);
+        gpio_set_level(LED_MERAH,LOW);
+        gpio_set_level(LED_YLW,LOW);
+        gpio_set_level(LED_BUILTIN,HIGH);
+        vTaskDelay(1000/portTICK_PERIOD_MS);
+        gpio_set_level(LED_GREEN,LOW);
+        gpio_set_level(LED_MERAH,HIGH);
+        gpio_set_level(LED_YLW,LOW);
+        gpio_set_level(LED_BUILTIN,LOW);
+        vTaskDelay(1000/portTICK_PERIOD_MS);
+        gpio_set_level(LED_GREEN,LOW);
+        gpio_set_level(LED_MERAH,LOW);
+        gpio_set_level(LED_YLW,HIGH);
+        gpio_set_level(LED_BUILTIN,HIGH);
+        vTaskDelay(1000/portTICK_PERIOD_MS);
+    
+    }
+}
