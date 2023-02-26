@@ -1,0 +1,31 @@
+
+const int buttonPin = 18; 
+int buttonState;            
+int lastButtonState = HIGH;  
+int counter=0;
+unsigned long lastDebounceTime = 0;  
+unsigned long debounceDelay = 50;    
+
+void setup() {
+pinMode(buttonPin, INPUT);
+Serial.begin(115200);
+}
+
+void loop() {
+  int input = digitalRead(buttonPin);
+  if (input != lastButtonState) {
+    lastDebounceTime = millis();
+  }
+
+  if ((millis() - lastDebounceTime) > debounceDelay) {
+    if (input != buttonState) {
+      buttonState = input;
+      if (buttonState == LOW) {
+        counter++;
+        Serial.println(counter);
+      }
+    }
+  }
+
+  lastButtonState = input;
+}
